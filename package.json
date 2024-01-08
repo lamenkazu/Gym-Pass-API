@@ -1,7 +1,7 @@
 {
-  "name": "nodejs-com-solid",
+  "name": "gym-pass-api",
   "version": "1.0.0",
-  "description": "- [] Deve ser possível se cadastrar;\r - [] Deve ser possível se autenticar;\r - [] Deve ser possível obter o perfil de um usuário logado;\r - [] Deve ser possível obter número de check-ins realizado pelo usuário logado;\r - [] Deve ser possível o usuário obter seu histórico de check-ins;\r - [] Deve ser possível o usuário buscar academias próximas;\r - [] Deve ser possível o usuário buscar academias pelo nome;\r - [] Deve ser possível o usuário realizar check-in em uma academia;\r - [] Deve ser possível validar o check-in de um usuário;\r - [] Deve ser possível cadastrar uma academia;",
+  "description": "GymPass Style App",
   "main": "index.js",
   "scripts": {
     "start": "node build/server.js",
@@ -14,12 +14,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.10.7",
-    "tsup": "^8.0.1",
-    "tsx": "^4.7.0",
-    "typescript": "^5.3.3"
+    "@types/node": "20.10.7",
+    "tsup": "8.0.1",
+    "tsx": "4.7.0",
+    "typescript": "5.3.3"
   },
   "dependencies": {
-    "fastify": "^4.25.2"
+    "fastify": "4.25.2"
   }
 }
