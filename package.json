@@ -4,6 +4,8 @@
   "description": "GymPass Style App",
   "main": "index.js",
   "scripts": {
+    "dockerComposeUp": "docker compose up -d",
+    "dockerComposeStop": "docker compose stop",
     "start": "node build/server.js",
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
@@ -14,12 +16,16 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcryptjs": "2.4.6",
     "@types/node": "20.10.7",
+    "prisma": "5.10.2",
     "tsup": "8.0.1",
     "tsx": "4.7.0",
     "typescript": "5.3.3"
   },
   "dependencies": {
+    "@prisma/client": "5.10.2",
+    "bcryptjs": "2.4.3",
     "dotenv": "16.3.1",
     "fastify": "4.25.2",
     "zod": "3.22.4"
