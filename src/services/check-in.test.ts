@@ -4,22 +4,24 @@ import { CheckInService } from "./check-in";
 import { InMemoryCheckInsRepository } from "@/repositories/in-memory/in-memory-check-ins-repository";
 import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-repository";
 import { Decimal } from "@prisma/client/runtime/library";
+import { MaxNumberOfCheckInsError } from "./errors/max-number-of-check-ins-error";
+import { MaxDistanceError } from "./errors/max-distance-error";
 
 let memoryCheckInRepo: InMemoryCheckInsRepository;
 let memoryGymRepo: InMemoryGymsRepository;
 let sut: CheckInService;
 
 describe("Check In Service", () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     memoryCheckInRepo = new InMemoryCheckInsRepository();
     memoryGymRepo = new InMemoryGymsRepository();
     sut = new CheckInService(memoryCheckInRepo, memoryGymRepo);
 
-    memoryGymRepo.items.push({
+    await memoryGymRepo.create({
       id: "gym-01",
       title: "Javascript Gym",
-      lat: new Decimal(-19.8402653),
-      long: new Decimal(-43.953214),
+      lat: -19.8402653,
+      long: -43.953214,
       description: "",
       phone: "",
     });
@@ -59,7 +61,7 @@ describe("Check In Service", () => {
         userLat: -19.8402653,
         userLong: -43.953214,
       })
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(MaxNumberOfCheckInsError);
   });
 
   it("should  be able to check in twice in a day but in different days", async () => {
@@ -82,14 +84,21 @@ describe("Check In Service", () => {
     expect(checkIn.id).toEqual(expect.any(String));
   });
 
-  //   ,
-
   it("should not be able to check in in a distant gym", async () => {
     memoryGymRepo.items.push({
       id: "gym-02",
       title: "Javascript Gym",
       lat: new Decimal(-19.8972633),
       long: new Decimal(-43.8970035),
+      description: "",
+      phone: "",
+    });
+
+    await memoryGymRepo.create({
+      id: "gym-02",
+      title: "Javascript Gym",
+      lat: -19.8972633,
+      long: -43.8970035,
       description: "",
       phone: "",
     });
@@ -101,6 +110,6 @@ describe("Check In Service", () => {
         userLat: -19.8402653,
         userLong: -43.953214,
       })
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(MaxDistanceError);
   });
 });
