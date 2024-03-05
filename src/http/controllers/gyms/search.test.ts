@@ -12,7 +12,7 @@ describe("Search Gyms Controller (e2e)", () => {
   });
 
   it("should be able to search gyms by title", async () => {
-    const { token } = await createAndAuthenticateUser(app);
+    const { token } = await createAndAuthenticateUser(app, true);
 
     //Cria 2 academias para pesquisar
     await request(app.server)

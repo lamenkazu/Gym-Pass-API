@@ -13,7 +13,7 @@ describe("Validate Check-In Controller (e2e)", () => {
   });
 
   it("should be able to validate a check-in", async () => {
-    const { token } = await createAndAuthenticateUser(app);
+    const { token } = await createAndAuthenticateUser(app, true);
 
     const user = await prisma.user.findFirstOrThrow(); //Busca o único usuário cadastrado no banco pelo método acima de create and authenticate user
 

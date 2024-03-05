@@ -12,7 +12,7 @@ describe("Fetch Nearby Gyms Controller (e2e)", () => {
   });
 
   it("should be able to fetch nearby gyms", async () => {
-    const { token } = await createAndAuthenticateUser(app);
+    const { token } = await createAndAuthenticateUser(app, true);
 
     //Cria 2 academias para pesquisar com distancias diferentes
     await request(app.server)
